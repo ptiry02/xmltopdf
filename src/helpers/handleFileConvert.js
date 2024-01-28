@@ -2,7 +2,7 @@ import html2pdf from 'html2pdf.js/dist/html2pdf.min';
 import ReactDOMServer from 'react-dom/server';
 import { ExplorationReportTemplate } from '../Components/ExplorationReportTemplate';
 
-const api = process.meta.env.VITE_API || 'http://192.168.1.35:5050/upload';
+const api = import.meta.env.VITE_API || 'http://192.168.1.35:5050/upload';
 
 export const handleUpload = async (file) => {
 	if (!file) return;

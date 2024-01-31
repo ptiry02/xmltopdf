@@ -30,4 +30,6 @@ export const handleUpload = async (file) => {
 	};
 
 	html2pdf().set(opts).from(printElement).save();
+
+	return data;
 };

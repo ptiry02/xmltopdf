@@ -1,14 +1,12 @@
 import { useRef, useState } from 'react';
 import { handleUpload } from './helpers/handleFileConvert';
 import './assets/css/App.css';
+import { ExplorationReportTemplate } from './Components/ExplorationReportTemplate';
 
 function App() {
 	const [file, setFile] = useState(null);
+	const [fileData, setFileData] = useState(null);
 	const fileInput = useRef();
-
-	const handlePrint = () => {
-		if (!fileData) return;
-	};
 
 	return (
 		<>
@@ -39,14 +37,16 @@ function App() {
 					className='btn-2'
 					disabled={!file ? true : false}
 					onClick={async () => {
-						await handleUpload(file);
+						const data = await handleUpload(file);
 						setFile(null);
+						setFileData(data);
 						fileInput.current.value = null;
 					}}
 				>
 					Convertir
 				</button>
 			</div>
+			{fileData && <ExplorationReportTemplate {...fileData} />}
 		</>
 	);
 }

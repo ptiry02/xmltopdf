@@ -1,12 +1,24 @@
 import '../assets/css/ExplorationReportTemplate.css';
-import triumphLogo from '../assets/images/triumph-motorcycle-logo.jpeg';
-import correct from '../assets/images/icons8-correct-80.png';
-import incorrect from '../assets/images/icons8-error-80.png';
+import triumphLogo from '../assets/images/logo3.gif';
+import correct from '../assets/images/pass.gif';
+import incorrect from '../assets/images/fail.gif';
+import notTested from '../assets/images/nottested.gif';
+
 import { Fragment } from 'react';
 
 export const ExplorationReportTemplate = (props) => {
 	const dealerName =
 		props.DealerName.Value !== '' ? props.DealerName.Value : 'MAQUINA MOTORS';
+	const renderIcon = (message) => {
+		switch (message.toLowerCase()) {
+			case 'correcto':
+				return correct;
+			case 'incorrecto':
+				return incorrect;
+			default:
+				return notTested;
+		}
+	};
 	return (
 		<div id='page'>
 			<div id='table-wrapper'>
@@ -52,11 +64,11 @@ export const ExplorationReportTemplate = (props) => {
 							<span>{el.Result}</span>
 						</div>
 						<div className='info-cell icon'>
-							{el.Result === 'Correcto' ? (
-								<img className='icon' src={correct} alt='correcto' />
-							) : (
-								<img className='icon' src={incorrect} alt='incorrecto' />
-							)}
+							<img
+								className='icon'
+								src={renderIcon(el.Result)}
+								alt='incorrecto'
+							/>
 						</div>
 					</Fragment>
 				))}
@@ -64,21 +76,21 @@ export const ExplorationReportTemplate = (props) => {
 			<h2 className='h2'>{props.TestResult.Param}</h2>
 			<div id='result' className='result-footer'>
 				<div className='info-cell footer icon'>
-					{props.TestResult.Value.toLowerCase() === 'correcto' ? (
-						<img className='icon' src={correct} alt='correcto' />
-					) : (
-						<img className='icon' src={incorrect} alt='incorrecto' />
-					)}
+					<img
+						className='icon'
+						src={renderIcon(props.TestResult.Value)}
+						alt='incorrecto'
+					/>
 				</div>
 				<div className='info-cell footer bold'>
 					<span>{props.TestResult.Value}</span>
 				</div>
 				<div className='info-cell footer icon'>
-					{props.TestResult.Value.toLowerCase() === 'correcto' ? (
-						<img className='icon' src={correct} alt='correcto' />
-					) : (
-						<img className='icon' src={incorrect} alt='incorrecto' />
-					)}
+					<img
+						className='icon'
+						src={renderIcon(props.TestResult.Value)}
+						alt='incorrecto'
+					/>
 				</div>
 			</div>
 			<h2 className='h2'>{props.TestNotesTitle.Param}</h2>

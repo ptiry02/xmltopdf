@@ -8,7 +8,6 @@ function App() {
 
 	return (
 		<>
-			{console.log('File: ', file)}
 			<div id='app-wrapper'>
 				<h1 id='title'>XML a PDF</h1>
 				<label id='file-input-label' htmlFor='file-input'>
@@ -23,7 +22,6 @@ function App() {
 					onChange={(e) => {
 						setFile(e.target.files[0]);
 					}}
-					// value={file}
 					style={{ display: 'none' }}
 				/>
 				{file ? (
